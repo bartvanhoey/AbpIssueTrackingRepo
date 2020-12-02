@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IssueTracking.Application.Contracts.Issues;
 
 namespace IssueTracking.Blazor
 {
@@ -7,6 +8,8 @@ namespace IssueTracking.Blazor
         public IssueTrackingBlazorAutoMapperProfile()
         {
             //Define your AutoMapper configuration here for the Blazor project.
+
+            CreateMap<IssueDto, UpdateIssueDto>();
         }
     }
 }

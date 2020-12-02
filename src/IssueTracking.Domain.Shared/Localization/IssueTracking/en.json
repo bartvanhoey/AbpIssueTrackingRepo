@@ -1,8 +1,16 @@
 {
-  "culture": "en",
-  "texts": {
-    "Menu:Home": "Home",
-    "Welcome": "Welcome",
-    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io."
-  }
+    "culture": "en",
+    "texts": {
+        "Menu:Home": "Home",
+        "Welcome": "Welcome",
+        "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
+        "IssueTracking:CanNotLockAnOpenIssue": "Can not lock a an open issue! Close it first",
+        "IssueTracking:CanNotOpenLockedIssue": "Can not open a locked issue! Unlock it first.",
+        "IssueTracking:ConcurrentOpenIssueLimit": "Can not assign more than 3 open issues to a user concurrently",
+        "IssueTracking:IssueWithSameTitleExists": "There is already an issue with the same title",
+        "NewIssue": "New issue",
+        "IssueDeletionConfirmationMessage": "Are you sure to delete the issue '{0}'?",
+        "Menu:TrackIssues": "TrackIssues",
+        "Menu:Issues": "Issues"
+    }
 }
