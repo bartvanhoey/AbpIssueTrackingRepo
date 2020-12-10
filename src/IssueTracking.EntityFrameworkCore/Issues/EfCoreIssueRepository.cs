@@ -18,10 +18,17 @@ namespace IssueTracking.EntityFrameworkCore.Issues
     {
     }
 
+    public async Task<int> GetIssueCountOfUserAsync(Guid userId)
+    {
+      return await DbSet.Where(i => i.AssignedUserId == userId && i.IsClosed == false).CountAsync();
+    }
+
     public async Task<List<Issue>> GetIssuesAsync(ISpecification<Issue> spec)
     {
       return await DbSet.Where(spec.ToExpression()).ToListAsync();
     }
+
+    
   }
 
 

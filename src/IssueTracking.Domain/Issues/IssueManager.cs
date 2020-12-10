@@ -9,9 +9,10 @@ namespace IssueTracking.Domain.Issues
 {
   public class IssueManager : DomainService
   {
-    private readonly IRepository<Issue, Guid> _issueRepository;
+    public const int MaxAllowedOpenIssuesForAUser = 3;
+    private readonly IIssueRepository _issueRepository;
 
-    public IssueManager(IRepository<Issue, Guid> issueRepository)
+    public IssueManager(IIssueRepository issueRepository)
     {
       _issueRepository = issueRepository;
     }
@@ -20,11 +21,22 @@ namespace IssueTracking.Domain.Issues
     {
       var openIssueCount = await _issueRepository.CountAsync(issue => issue.AssignedUserId == user.Id && !issue.IsClosed);
 
-      if (openIssueCount >= 3)
+      if (openIssueCount >= MaxAllowedOpenIssuesForAUser)
       {
-        throw new BusinessException("IssueTracking:ConcurrentOpenIssueLimit");
+        throw new BusinessException(code: "IM:00392", message: $"You cannot assign more than {MaxAllowedOpenIssuesForAUser} issues to a user!");
       }
       issue.AssignedUserId = user.Id;
+    }
+
+ public async Task AssignToUserAsync(Issue issue, Guid userId)
+    {
+      var numberOpenIssues = await _issueRepository.GetIssueCountOfUserAsync(userId);
+
+      if (numberOpenIssues >= MaxAllowedOpenIssuesForAUser)
+      {
+        throw new BusinessException(code: "IM:00392", message: $"You cannot assign more than {MaxAllowedOpenIssuesForAUser} issues to a user!");
+      }
+      issue.AssignedUserId = userId;
     }
 
     public async Task<Issue> CreateAsync(Guid repositoryId, string title, string text = null)

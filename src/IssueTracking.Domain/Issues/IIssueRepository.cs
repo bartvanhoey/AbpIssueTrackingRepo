@@ -9,5 +9,6 @@ namespace IssueTracking.Domain.Issues
   public interface IIssueRepository : IRepository<Issue, Guid>
   {
     Task<List<Issue>> GetIssuesAsync(ISpecification<Issue> spec);
+    Task<int> GetIssueCountOfUserAsync(Guid userId);
   }
 }

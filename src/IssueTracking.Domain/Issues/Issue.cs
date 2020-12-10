@@ -5,6 +5,7 @@ using IssueTracking.Domain.Shared.Issues;
 using Volo.Abp;
 using Volo.Abp.Auditing;
 using Volo.Abp.Domain.Entities;
+using Volo.Abp.Timing;
 
 namespace IssueTracking.Domain.Issues
 {
@@ -20,6 +21,7 @@ namespace IssueTracking.Domain.Issues
     public ICollection<IssueLabel> Labels { get; set; }
     public DateTime CreationTime { get; private set; }
     public DateTime? LastCommentTime { get; private set; }
+    public DateTime? CloseDate { get; set; }
     public Guid MileStoneId { get; set; }
 
     private Issue() { }
@@ -42,6 +44,7 @@ namespace IssueTracking.Domain.Issues
     {
       IsClosed = true;
       CloseReason = reason;
+      CloseDate = DateTime.Now;
     }
 
     public void Reopen()
@@ -52,6 +55,7 @@ namespace IssueTracking.Domain.Issues
       }
       IsClosed = false;
       CloseReason = null;
+      CloseDate = null;
     }
 
     public void Lock()

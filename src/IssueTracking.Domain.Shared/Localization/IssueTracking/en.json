@@ -11,6 +11,7 @@
         "NewIssue": "New issue",
         "IssueDeletionConfirmationMessage": "Are you sure to delete the issue '{0}'?",
         "Menu:TrackIssues": "TrackIssues",
-        "Menu:Issues": "Issues"
+        "Menu:Issues": "Issues",
+        "Issue:00392": "The maximum allowed open issues for a user is 3!"
     }
 }
